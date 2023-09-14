@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <title>Usuario</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</head>
+
+<body>
+
+<div class="container mt-4 my-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{user.first_name}} {{user.last_name}}</h3>
+            <p class="card-text"><strong>Email:</strong> {{user.email}}</p>
+            <p class="card-text"><strong>Género:</strong> {{user.gender}}</p>
+            <p class="card-text"><strong>Rol:</strong> {{user.rol}}</p>
+            {{#if userProfileImage}}
+            <img src="/documents/profiles/{{userProfileImage.reference}}" alt="Foto de Perfil" width="400"
+              class="rounded-circle img-thumbnail" />
+            {{else}}
+            <i class="fas fa-user-circle fa-5x"></i>
+            <p>No hay foto de perfil.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>Cambiar Datos del Usuario</h4>
+        <form action="/users/{{user._id}}/edit" method="POST">
+          <div class="form-group">
+            <label for="first_name">Nombre:</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}" />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Apellido:</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}" />
+          </div>
+          <div class="form-group">
+            <label for="gender">Género:</label>
+            <select class="form-control" id="gender" name="gender">
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="indeterminado">Indeterminado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
+    <h4>Foto de Perfil</h4>
+    <form action="/users/{{user._id}}/documents/upload-profile" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="profileImage">Cargar Foto de Perfil:</label>
+        <input type="file" class="form-control" id="profileImage" name="profileImage" />
+      </div>
+      <button type="submit" class="btn btn-primary">Subir Foto de Perfil</button>
+    </form>
+  </div>
+ <div class="container mt-2 my-5">
+    <div>
+      <button id="changePasswordBtn" class="btn btn-warning">Cambiar Contraseña</button>
+    </div>
+    <div id="passwordContainer" style="display: none;">
+   
+      <form action="/users/{{user._id}}/change-password" method="POST">
+        <div class="form-group mx-auto" style="max-width: 400px;">
+          <label for="newPassword">Nueva Contraseña:</label>
+          <input type="password" class="form-control" id="newPassword" name="newPassword" />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-warning">Guardar Contraseña</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+    const changePasswordBtn = document.getElementById('changePasswordBtn');
+    const passwordContainer = document.getElementById('passwordContainer');
+    changePasswordBtn.addEventListener('click', () => {
+      passwordContainer.style.display = 'block';
+    });
+  </script>
+  <script>
+
+    function showSuccessAlert(message) {
+      Swal.fire({
+        icon: 'success', title:
+          'Éxito', text: message, showConfirmButton: false, timer: 2500
+      });
+    } const
+      successMessage = "{{message}}"; if (successMessage) {
+        showSuccessAlert(successMessage);
+      }
+  </script>
+
+</body>
+
+</html>

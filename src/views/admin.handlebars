@@ -1,0 +1,227 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: #96b1cc;
+        }
+    </style>
+    <div class="container mt-4">
+        <div class="text-right">
+            <h3>Bienvenido, {{userName}}</h3>
+            {{#if userProfileImage}}
+            <img src="/documents/profiles/{{userProfileImage.reference}}" alt="Foto de Perfil" width="200"
+                class="rounded-circle img-thumbnail" />
+            {{else}}
+            <i class="fas fa-user-circle fa-5x"></i>
+            {{/if}}
+            <h4>{{email}}</h4>
+            <h5>Usted tiene permisos de: {{rol}}</h5>
+            <form id="adminForm" action="/admin" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-link text-danger">
+                    <i class="fas fa-home fa-2x text-danger"></i>
+                    <span class="text-danger">Home</span>
+                </button>
+            </form>
+
+            <a href="/chat" class="btn btn-link text-danger">
+                <i class="fas fa-comments fa-2x text-danger"></i>
+                <span class="text-danger">Chat</span>
+            </a>
+
+            <form action="/admin/adminUser" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-link text-danger">
+                    <i class="fas fa-user-cog fa-2x text-danger"></i>
+                    <span class="text-danger">Administración de Usuarios</span>
+                </button>
+            </form>
+            <form action="/admin/perfil" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-link text-danger">
+                    <i class="fas fa-user fa-2x text-danger"></i>
+                    <span class="text-danger">Perfil</span>
+                </button>
+            </form>
+        </div>
+
+        <h1>Portal de Administración</h1>
+        <form action="/admin" method="get">
+            <div class="form-group">
+                <label for="query">Filtrar por título:</label>
+                <input type="text" class="form-control" id="query" name="query" placeholder="Ingrese un título" />
+            </div>
+            <div class="form-group">
+                <label for="sort">Ordenar por precio:</label>
+                <select class="form-control" id="sort" name="sort">
+                    <option value="">Seleccione</option>
+                    <option value="asc">Ascendente</option>
+                    <option value="desc">Descendente</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="owner"> Ordenar por tienda :</label>
+                <select class="form-control" id="owner" name="owner">
+                    <option value="">Todas</option>
+                    {{#each storeList}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Aplicar</button>
+        </form>
+        <form id="addProductForm" action="/admin/products/owner/addproduct" method="post">
+            <!-- Botón que muestra los campos para agregar producto -->
+            <button type="button" class="btn btn-success" id="showAddProductFields">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+
+            <!-- Campos para agregar producto (inicialmente ocultos) -->
+            <div id="addProductFields" style="display: none;">
+                <div class="form-group">
+                    <label for="code">Código:</label>
+                    <input type="text" class="form-control" id="code" name="code" required>
+                </div>
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción:</label>
+                    <textarea class="form-control" id="description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock:</label>
+                    <input type="number" class="form-control" id="stock" name="stock" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Precio:</label>
+                    <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="thumbnail">URL del Thumbnail:</label>
+                    <input type="text" class="form-control" id="thumbnail" name="thumbnail" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+        </form>
+        <div class="row">
+            {{#each products}}
+            <div class="col-md-4 mt-4">
+                <div class="card">
+                    <img src="{{this.thumbnail}}" class="card-img-top" alt="Thumbnail"
+                        style="width: 50%; display: block; margin: 0 auto;" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <p class="card-text"><strong>Precio:</strong> {{this.price}}</p>
+                        <p class="card-text"><strong>Stock:</strong> {{this.stock}}</p>
+                        <p class="card-text"><strong>Tienda propietaria:</strong> {{this.owner}}</p>
+                        <form action="/admin/products/{{this._id}}/update-price" method="post">
+                            <div class="form-group">
+                                <label for="amount">Nuevo precio:</label>
+                                <input type="number" class="form-control" id="amount" name="amount"
+                                    value="{{this.stock}}" min="0" required>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Actualizar precio</button>
+                        </form>
+                        <form action="/admin/products/{{this._id}}/update-stock" method="post">
+                            <div class="form-group">
+                                <label for="amount">Nuevo stock:</label>
+                                <input type="number" class="form-control" id="amount" name="amount"
+                                    value="{{this.stock}}" min="0" required>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Actualizar stock</button>
+                        </form>
+                        <form action="/admin/products/{{this._id}}/delete-product" method="post">
+                            <div class="form-group">
+                                <label for="amount">Eliminar producto:</label>
+                            </div>
+                            <button class="btn btn-danger btn-block" type="button"
+                                onclick="confirmDelete('{{this._id}}')">
+                                <i class="fas fa-trash-alt"></i> Eliminar producto
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div id="message-container" class="text-center mt-4">
+            {{#if message}}
+            <script>
+                Swal.fire({
+                    title: "Mensaje",
+                    text: `{{message}}`,
+                    icon: "success",
+                    timer: 3000,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false
+                });
+            </script>
+            {{/if}}
+        </div>
+        <div class="text-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {{#if response.hasPrevPage}}
+                    <li class="page-item">
+                        <a class="page-link" href="{{response.prevLink}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if response.hasNextPage}}
+                    <li class="page-item">
+                        <a class="page-link" href="{{response.nextLink}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </nav>
+        </div>
+        <form action="/logout" method="get">
+            <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+        </form>
+        <div class="d-flex mt-4">
+            <p class="mr-4"><strong>Status</strong>: {{response.status}}</p>
+            <p class="mr-4"><strong>Total Páginas:</strong> {{response.totalPages}}</p>
+            <p class="mr-4"><strong>Anterior:</strong> {{response.prevPage}}</p>
+            <p class="mr-4"><strong>Próxima:</strong> {{response.nextPage}}</p>
+            <p><strong>Actual:</strong> {{response.page}}</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('showAddProductFields').addEventListener('click', function () {
+            document.getElementById('addProductFields').style.display = 'block';
+        });
+    </script>
+    <script>
+        function confirmDelete(productId) {
+            const confirmation = confirm("¿Estás seguro que quieres eliminar este producto?");
+            if (confirmation) {
+                const form = document.querySelector(`form[action="/admin/products/${productId}/delete-product"]`);
+                if (form) {
+                    form.submit();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

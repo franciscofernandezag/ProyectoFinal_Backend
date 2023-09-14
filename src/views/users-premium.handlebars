@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <title>Usuario</title>
+
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Perfil </h1>
+<form id="adminForm" action="/premium/admin" method="GET" style="display: inline;">
+  <button type="submit" class="btn btn-link">
+    <i class="fas fa-home fa-2x"></i>
+    <span class="badge badge-danger"></span>
+  </button>
+</form>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">{{user.first_name}} {{user.last_name}}</h2>
+            <p class="card-text"><strong>Email:</strong> {{user.email}}</p>
+            <p class="card-text"><strong>Género:</strong> {{user.gender}}</p>
+            <p class="card-text"><strong>Rol:</strong> {{user.rol}}</p>
+            {{#if userProfileImage}}
+            <img src="/documents/profiles/{{userProfileImage.reference}}" alt="Foto de Perfil" width="400"
+              class="rounded-circle img-thumbnail" />
+            {{else}}
+            <i class="fas fa-user-circle fa-5x"></i>
+            <p>No hay foto de perfil.</p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h4>Modificar Datos</h4>
+        <form action="/users/premium/{{user._id}}/edit" method="POST">
+          <div class="form-group">
+            <label for="first_name">Nombre:</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}" />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Apellido:</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}" />
+          </div>
+          <div class="form-group">
+            <label for="gender">Género:</label>
+            <select class="form-control" id="gender" name="gender">
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="indeterminado">Indeterminado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+        <div class="container mt-4">
+          <button id="changePasswordBtn" class="btn btn-warning">Cambiar Contraseña</button>
+          <div id="passwordContainer" style="display: none;">
+            <h4>Cambiar Contraseña</h4>
+            <form action="/users/premium/{{user._id}}/change-password" method="POST">
+              <div class="form-group">
+                <label for="newPassword">Nueva Contraseña:</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" />
+              </div>
+              <button type="submit" class="btn btn-warning">Guardar Contraseña</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Foto de Perfil</h4>
+        <form action="/users/premium/{{user._id}}/documents/upload-profile" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="profileImage">Cargar Foto de Perfil:</label>
+            <input type="file" class="form-control" id="profileImage" name="profileImage" />
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Foto de Perfil</button>
+        </form>
+      </div>
+
+
+      <div class="col-md-6">
+        <h4>Estado de Cuenta</h4>
+        {{#if userCuentaImage}}
+        <p><i class="fas fa-check-circle text-success"></i> Estado de cuenta cargado: {{userCuentaImage.reference}}</p>
+        {{else}}
+        <p>No se ha subido ningún estado de cuenta.</p>
+        {{/if}}
+        <form action="/users/premium/{{user._id}}/documents/upload-estadoCuenta" method="POST"
+          enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="estadoCuentaDocument">Cargar Estado de Cuenta:</label>
+            <input type="file" class="form-control" id="estadoCuentaDocument" name="estadoCuentaDocument" />
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Estado de Cuenta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Identificación</h4>
+        {{#if userDniImage}}
+        <p><i class="fas fa-check-circle text-success"></i> Documento DNI cargado: {{userDniImage.reference}}</p>
+        {{else}}
+        <p>No se ha subido ningún Documento DNI.</p>
+        {{/if}}
+        <form action="/users/premium/{{user._id}}/documents/upload-address-proof" method="POST"
+          enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="dniDocument">Cargar Identificación:</label>
+            <input type="file" class="form-control" id="dniDocument" name="dniDocument" />
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Identificación</button>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <h4>Comprobante de Domicilio</h4>
+        {{#if userDomicilioImage}}
+        <p><i class="fas fa-check-circle text-success"></i> Comprobante de domicilio cargado:
+          {{userDomicilioImage.reference}}</p>
+        {{else}}
+        <p>No se ha subido ningún comprobante de domicilio.</p>
+        {{/if}}
+        <form action="/users/premium/{{user._id}}/documents/upload-domicilio" method="POST"
+          enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="addressProofImage">Cargar Comprobante de Domicilio:</label>
+            <input type="file" class="form-control" id="comprobanteDomicilioDocument"
+              name="comprobanteDomicilioDocument" />
+          </div>
+          <button type="submit" class="btn btn-primary">Subir Comprobante de Domicilio</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const userRole = "{{user.rol}}";
+    const bodyElement = document.body;
+
+    if (userRole === "premium") {
+      bodyElement.style.backgroundColor = "rgb(171, 235, 209)";
+    } else if (userRole === "administrador") {
+      bodyElement.style.backgroundColor = "#96b1cc";
+    }
+  </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const userRole = "{{user.rol}}";
+    const adminForm = document.getElementById('adminForm');
+
+    if (userRole === "administrador") {
+      adminForm.action = "/admin";
+    }
+  });
+</script>
+
+</body>
+
+</html>
+<script>
+  const changePasswordBtn = document.getElementById('changePasswordBtn');
+  const passwordContainer = document.getElementById('passwordContainer');
+  changePasswordBtn.addEventListener('click', () => {
+    passwordContainer.style.display = 'block';
+  });
+</script>
+
+<script>
+  function showSuccessAlert(message) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito',
+      text: message,
+      showConfirmButton: false,
+      timer: 2500
+    });
+  }
+
+  const successMessage = "{{message}}";
+  if (successMessage) {
+    showSuccessAlert(successMessage);
+  }
+</script>
+
+</html>

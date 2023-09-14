@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra o Administración</title>
+    <!-- Enlace a las hojas de estilo de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        ¿Qué deseas hacer?
+                    </div>
+                    <div class="card-body">
+                        <form action="/products" method="GET">
+                            <button type="submit" class="btn btn-primary btn-block">Comprar Productos</button>
+                        </form>
+                        <form action="/premium/admin" method="GET">
+                            <button type="submit" class="btn btn-secondary btn-block mt-3">Administrar Tienda</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

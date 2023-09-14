@@ -1,0 +1,36 @@
+
+    <div class="container">
+      <div class="send-button-container">
+        <form action="/message/failed" method="get">
+          <button class="btn btn-success btn-block send-button" type="submit">Enviar detalle de productos a correo electronico</button>
+        </form>
+      </div>
+      <h1 class="mb-4">Compra Fallida</h1>
+      <div class="alert alert-danger" role="alert">
+        <p class="mb-0">No se pudo adquirir los siguientes productos por falta de stock:</p>
+      </div>
+      <div class="row">
+        {{#each products}}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img src="{{this.product.thumbnail}}" class="card-img-top" alt="{{this.product.title}}">
+            <div class="card-body">
+              <h5 class="card-title">{{this.product.title}}</h5>
+              <p class="card-text">{{this.product.description}}</p>
+              <p class="card-text"><strong>Precio:</strong> {{this.price}}</p>
+              <p class="card-text"><strong>Cantidad:</strong> {{this.quantity}}</p>
+              <p class="card-text"><strong>Subtotal:</strong> {{this.subtotal}}</p>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+  <form action="/" method="GET" style="display: inline;">
+    <button type="submit" class="btn btn-link">
+      <i class="fas fa-home fa-2x"></i>
+      <span class="badge badge-danger">{{cartItemCount}}</span>
+      <span>Home</span>
+    </button>
+  </form>

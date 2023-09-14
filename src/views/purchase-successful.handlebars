@@ -1,0 +1,28 @@
+
+  <div class="container">
+      <form action="/message/succesful" method="get">
+    <button class="btn btn-success btn-block send-button" type="submit">Enviar lista de compra a correo electronico</button>
+  </form>
+    <h1 class="mb-4">Compra Exitosa</h1>
+    <div class="alert alert-success" role="alert">
+      <p class="mb-0">La compra se ha realizado correctamente.</p>
+    </div>
+    <h3 class="mt-4">Productos comprados:</h3>
+    <div class="row">
+      {{#each products}}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{{this.product.thumbnail}}" class="card-img-top" alt="{{this.product.title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{this.product.title}}</h5>
+            <p class="card-text">{{this.product.description}}</p>
+            <p class="card-text"><strong>Precio:</strong> {{this.price}}</p>
+            <p class="card-text"><strong>Cantidad:</strong> {{this.quantity}}</p>
+            <p class="card-text"><strong>Subtotal:</strong> {{this.subtotal}}</p>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="text-right">
+      <h4>Total de la compra: {{total}}</h4>

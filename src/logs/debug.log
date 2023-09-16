@@ -165,3 +165,7 @@ http: Server on port 4000 {"timestamp":"2023-09-16 14:28:18"}
 http: DB is connected {"timestamp":"2023-09-16 14:28:19"}
 http: Server on port 4000 {"timestamp":"2023-09-16 15:24:06"}
 http: DB is connected {"timestamp":"2023-09-16 15:24:07"}
+http: Server on port 4000 {"timestamp":"2023-09-16 15:30:04"}
+http: DB is connected {"timestamp":"2023-09-16 15:30:05"}
+info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 15:30:14 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 15:30:14"}
+info: Se envió un correo a fco.fernandez.ag@gmail.com con la compra exitosa procesada. {"timestamp":"2023-09-16 15:30:26"}

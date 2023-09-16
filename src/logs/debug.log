@@ -157,3 +157,5 @@ http: Server on port 4000 {"timestamp":"2023-09-16 18:59:08"}
 http: DB is connected {"timestamp":"2023-09-16 18:59:09"}
 info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 18:59:30 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 18:59:30"}
 info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 18:59:30 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 18:59:31"}
+http: Server on port 4000 {"timestamp":"2023-09-16 19:05:15"}
+http: DB is connected {"timestamp":"2023-09-16 19:05:16"}

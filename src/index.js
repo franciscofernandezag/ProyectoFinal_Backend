@@ -1,6 +1,5 @@
 import "dotenv/config";
 import express from "express";
-import session from 'express-session';
 import { Server } from 'socket.io'
 import { engine } from 'express-handlebars';
 import path from 'path';
@@ -24,6 +23,7 @@ import loggerTestRouter from "./routes/loggerTest.routes.js";
 import { loggerDev, loggerProd } from  "./utils/logger.js";
 import swaggerJsdoc from  'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
+import session from 'express-session';
 
 const app = express();
 const PORT = 4000;

@@ -25,7 +25,6 @@ import { loggerDev, loggerProd } from  "./utils/logger.js";
 import swaggerJsdoc from  'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
 
-
 const app = express();
 const PORT = 4000;
 

@@ -147,40 +147,13 @@ http: Server on port 4000 {"timestamp":"2023-09-16 13:23:52"}
 http: DB is connected {"timestamp":"2023-09-16 13:23:53"}
 info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 13:31:20 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 13:31:21"}
 info: Usuario fco.fernandez.ag@gmail.com cerró sesión. Última conexión: Sat Sep 16 2023 13:31:32 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 13:31:32"}
-http: Server on port 4000 {"timestamp":"2023-09-16 13:35:44"}
-http: DB is connected {"timestamp":"2023-09-16 13:35:46"}
-info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 13:36:11 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 13:36:11"}
-info: Usuario fco.fernandez.ag@gmail.com cerró sesión. Última conexión: Sat Sep 16 2023 13:36:14 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 13:36:14"}
-http: Server on port 4000 {"timestamp":"2023-09-16 13:44:20"}
-http: DB is connected {"timestamp":"2023-09-16 13:44:21"}
-http: Server on port 4000 {"timestamp":"2023-09-16 13:58:11"}
-http: Server on port 4000 {"timestamp":"2023-09-16 14:22:14"}
-http: Server on port 4000 {"timestamp":"2023-09-16 14:22:29"}
-http: DB is connected {"timestamp":"2023-09-16 14:22:30"}
-http: Server on port 4000 {"timestamp":"2023-09-16 14:23:25"}
-http: DB is connected {"timestamp":"2023-09-16 14:23:26"}
-http: Server on port 4000 {"timestamp":"2023-09-16 14:27:48"}
-http: DB is connected {"timestamp":"2023-09-16 14:27:49"}
-http: Server on port 4000 {"timestamp":"2023-09-16 14:28:18"}
-http: DB is connected {"timestamp":"2023-09-16 14:28:19"}
-http: Server on port 4000 {"timestamp":"2023-09-16 15:24:06"}
-http: DB is connected {"timestamp":"2023-09-16 15:24:07"}
-http: Server on port 4000 {"timestamp":"2023-09-16 15:30:04"}
-http: DB is connected {"timestamp":"2023-09-16 15:30:05"}
-info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 15:30:14 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 15:30:14"}
-info: Se envió un correo a fco.fernandez.ag@gmail.com con la compra exitosa procesada. {"timestamp":"2023-09-16 15:30:26"}
-http: Server on port 4000 {"timestamp":"2023-09-16 15:45:32"}
-http: DB is connected {"timestamp":"2023-09-16 15:45:33"}
-http: Server on port 4000 {"timestamp":"2023-09-16 15:56:21"}
-http: DB is connected {"timestamp":"2023-09-16 15:56:22"}
-info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 15:56:29 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 15:56:29"}
-http: Server on port 4000 {"timestamp":"2023-09-16 16:09:46"}
-http: DB is connected {"timestamp":"2023-09-16 16:09:47"}
-info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 16:10:03 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 16:10:03"}
-http: Server on port 4000 {"timestamp":"2023-09-16 16:14:36"}
-http: DB is connected {"timestamp":"2023-09-16 16:14:37"}
-http: Server on port 4000 {"timestamp":"2023-09-16 16:35:08"}
-http: DB is connected {"timestamp":"2023-09-16 16:35:09"}
-info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Sat Sep 16 2023 16:35:52 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 16:35:52"}
-http: Server on port 4000 {"timestamp":"2023-09-16 17:09:50"}
-http: DB is connected {"timestamp":"2023-09-16 17:09:51"}
+http: Server on port 4000 {"timestamp":"2023-09-16 16:59:04"}
+http: DB is connected {"timestamp":"2023-09-16 16:59:06"}
+http: Server on port 4000 {"timestamp":"2023-09-16 17:31:48"}
+http: DB is connected {"timestamp":"2023-09-16 17:31:49"}
+info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 17:32:06 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 17:32:06"}
+info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 17:32:07 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 17:32:07"}
+http: Server on port 4000 {"timestamp":"2023-09-16 18:59:08"}
+http: DB is connected {"timestamp":"2023-09-16 18:59:09"}
+info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 18:59:30 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 18:59:30"}
+info: Usuario testroutes@testroutes.com inició sesión. Última conexión: Sat Sep 16 2023 18:59:30 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-16 18:59:31"}

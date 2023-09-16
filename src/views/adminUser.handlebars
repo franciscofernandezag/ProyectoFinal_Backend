@@ -137,15 +137,17 @@
         </div>
     </div>
 
-    <script>
-        function confirmDelete(userId) {
-            const confirmation = confirm("¿Estás
-      seguro que quieres eliminar este usuario ? "); if (confirmation) { const
-      form =
-                document.querySelector(`form[action="/admin/adminUsers/${userId}/delete-user"]`);
-            if (form) { form.submit(); }
-        } }
-    </script>
+<script>
+    function confirmDelete(userId) {
+        const confirmation = confirm("¿Estás seguro que quieres eliminar este usuario?");
+        if (confirmation) {
+            const form = document.querySelector(`form[action="/admin/adminUsers/${userId}/delete-user"]`);
+            if (form) {
+                form.submit();
+            }
+        }
+    }
+</script>
 </body>
 
 </html>

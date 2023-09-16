@@ -5,6 +5,7 @@ import userDao from "../dao/userDao.js";
 import { transporter } from "../utils/nodemailer.js";
 import path from "path";
 import fs from "fs";
+import { productUploadMiddleware} from "../middleware/multer.js";
 
 const adminRouter = Router();
 
@@ -84,6 +85,57 @@ adminRouter.get("/", async (req, res) => {
     res.status(500).send("Error al recibir los productos:");
   }
 });
+// Ruta para agregar producto
+adminRouter.post("/products/owner/addproduct", async (req, res) => {
+  try {
+    const { code, title, description, stock, id, status, price, thumbnail } =
+      req.body;
+    const productData = {
+      code,
+      title,
+      description,
+      stock,
+      id,
+      status: true,
+      price,
+      thumbnail,
+      owner: req.session.user.email, // Establecer el owner como el owner logeado
+    };
+    await productDao.addProduct(productData);
+    req.session.message = "Producto agregado exitosamente.";
+    res.redirect(`/admin?message=${encodeURIComponent(req.session.message)}`);
+  } catch (error) {
+    loggerProd.fatal("Error al agregar un producto:", error);
+    res.status(500).send("Error al agregar un producto");
+  }
+});
+// Ruta para agregar producto con imagen cargada LOCALMENTE
+adminRouter.post("/products/owner/addproductLocal", productUploadMiddleware, async (req, res) => {
+  try {
+    const { code, title, description, stock, id, status, price } = req.body;
+    const thumbnailPath = `/documents/products/${req.file.filename}`;
+    console.log(thumbnailPath)
+    const productData = {
+      code,
+      title,
+      description,
+      stock,
+      id,
+      status: true,
+      price,
+      thumbnail: thumbnailPath, 
+      owner: req.session.user.email, 
+    };
+
+    await productDao.addProduct(productData);
+    req.session.message = "Producto agregado exitosamente.";
+    res.redirect(`/admin?message=${encodeURIComponent(req.session.message)}`);
+  } catch (error) {
+    loggerProd.fatal("Error al agregar un producto:", error);
+    res.status(500).send("Error al agregar un producto");
+  }
+});
+
 
 // Ruta para actualizar stock
 adminRouter.post("/products/:id/update-stock", async (req, res) => {
@@ -207,7 +259,7 @@ adminRouter.post("/products/:id/delete-product", async (req, res) => {
   }
 });
 
-// renderiza perfil de Administraodr
+// renderiza perfil de administrador
 adminRouter.get("/perfil", async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -241,6 +293,7 @@ adminRouter.get("/perfil", async (req, res) => {
   }
 });
 
+// Ruta de administracion de usuarios 
 adminRouter.get("/adminUser", async (req, res) => {
   try {
     const { limit = 12, page = 1, sort, query, message } = req.query;
@@ -323,12 +376,37 @@ adminRouter.get("/adminUser", async (req, res) => {
 adminRouter.post("/adminUsers/:userId/delete-user", async (req, res) => {
   try {
     const userId = req.params.userId;
+    
+    // Obtén la información del usuario
     const user = await userDao.getUserById(userId);
+
     if (!user) {
       return res.status(404).send("Usuario no encontrado");
     }
+
+    const ownerEmail = user.email; // Obtén el correo electrónico del usuario
+
     await userDao.deleteUser(userId);
-    req.session.message = "Has eliminado un usuario.";
+    req.session.message = "Has eliminado un usuario. Se enviara un correo a la direccion registrada del usuario informando la eliminacion.";
+
+    const htmlBody = `
+      <p>Estimado usuario,</p>
+      <p>Su usuario ha sido baneado de la tienda virtual Ebookstotal.</p>
+      <p>El motivo es porque violó las normativas de convivencia del chat.</p>
+
+      <p>Atentamente,</p>
+      <p>Tienda Virtual Ebookstotal.</p>
+    `;
+
+    // Envía el correo electrónico al usuario eliminado
+    await transporter.sendMail({
+      to: ownerEmail,
+      subject:
+        "Su usuario de la tienda Ebookstotal ha sido eliminado por el administrador",
+      html: htmlBody,
+ 
+    });
+
     res.redirect(
       `/admin/adminUser?message=${encodeURIComponent(req.session.message)}`
     );

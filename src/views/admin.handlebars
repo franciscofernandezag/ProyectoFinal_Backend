@@ -80,10 +80,11 @@
             </div>
             <button type="submit" class="btn btn-primary">Aplicar</button>
         </form>
+          
         <form id="addProductForm" action="/admin/products/owner/addproduct" method="post">
             <!-- Botón que muestra los campos para agregar producto -->
             <button type="button" class="btn btn-success" id="showAddProductFields">
-                <i class="fas fa-plus"></i> Agregar Producto
+                <i class="fas fa-plus"></i>   Agregar Producto imagen URL
             </button>
 
             <!-- Campos para agregar producto (inicialmente ocultos) -->
@@ -115,6 +116,42 @@
                 <button type="submit" class="btn btn-primary">Agregar</button>
             </div>
         </form>
+       
+    <form id="addProductLocalForm" action="/admin/products/owner/addproductLocal" method="post"
+      enctype="multipart/form-data">
+      <button type="button" class="btn btn-success" id="showAddProductLocalFields">
+        <i class="fas fa-plus"></i>
+           Agregar Producto con Imagen Local
+      </button>
+      <!-- Campos para agregar producto con imagen local (inicialmente ocultos) -->
+      <div id="addProductLocalFields" style="display: none;">
+        <div class="form-group">
+          <label for="codeLocal">Código:</label>
+          <input type="text" class="form-control" id="codeLocal" name="code" required />
+        </div>
+        <div class="form-group">
+          <label for="titleLocal">Título:</label>
+          <input type="text" class="form-control" id="titleLocal" name="title" required />
+        </div>
+        <div class="form-group">
+          <label for="descriptionLocal">Descripción:</label>
+          <textarea class="form-control" id="descriptionLocal" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="stockLocal">Stock:</label>
+          <input type="number" class="form-control" id="stockLocal" name="stock" required />
+        </div>
+        <div class="form-group">
+          <label for="priceLocal">Precio:</label>
+          <input type="number" class="form-control" id="priceLocal" name="price" required />
+        </div>
+        <div class="form-group">
+          <label for="productImageLocal">Imagen Local:</label>
+          <input type="file" class="form-control" id="productImageLocal" name="productImage" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+      </div>
+    </form>
         <div class="row">
             {{#each products}}
             <div class="col-md-4 mt-4">
@@ -164,7 +201,7 @@
                     title: "Mensaje",
                     text: `{{message}}`,
                     icon: "success",
-                    timer: 3000,
+                    timer: 5000,
                     timerProgressBar: true,
                     toast: true,
                     position: "top",
@@ -206,11 +243,17 @@
             <p><strong>Actual:</strong> {{response.page}}</p>
         </div>
     </div>
-    <script>
-        document.getElementById('showAddProductFields').addEventListener('click', function () {
-            document.getElementById('addProductFields').style.display = 'block';
-        });
-    </script>
+  <script>
+        // Mostrar campos para agregar producto con imagen url al hacer clic en el botón correspondiente
+    document.getElementById('showAddProductFields').addEventListener('click', function () {
+      document.getElementById('addProductFields').style.display = 'block';
+    });
+
+    // Mostrar campos para agregar producto con imagen local al hacer clic en el botón correspondiente
+    document.getElementById('showAddProductLocalFields').addEventListener('click', function () {
+      document.getElementById('addProductLocalFields').style.display = 'block';
+    });
+  </script>
     <script>
         function confirmDelete(productId) {
             const confirmation = confirm("¿Estás seguro que quieres eliminar este producto?");

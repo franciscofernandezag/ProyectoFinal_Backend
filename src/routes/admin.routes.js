@@ -53,13 +53,13 @@ adminRouter.get("/", async (req, res) => {
       hasNextPage: page < totalPages,
       prevLink:
         page > 1
-          ? `http://localhost:4000/admin?limit=${limit}&page=${
+          ? `https://tiendaebooks.onrender.com/admin?limit=${limit}&page=${
               parseInt(page) - 1
             }`
           : null,
       nextLink:
         page < totalPages
-          ? `http://localhost:4000/admin?limit=${limit}&page=${
+          ? `https://tiendaebooks.onrender.com/admin?limit=${limit}&page=${
               parseInt(page) + 1
             }`
           : null,
@@ -341,13 +341,13 @@ adminRouter.get("/adminUser", async (req, res) => {
       hasNextPage: page < totalPages,
       prevLink:
         page > 1
-          ? `http://localhost:4000/admin?limit=${limit}&page=${
+          ? `https://tiendaebooks.onrender.com/admin?limit=${limit}&page=${
               parseInt(page) - 1
             }`
           : null,
       nextLink:
         page < totalPages
-          ? `http://localhost:4000/admin?limit=${limit}&page=${
+          ? `https://tiendaebooks.onrender.com/admin?limit=${limit}&page=${
               parseInt(page) + 1
             }`
           : null,

@@ -16,7 +16,7 @@ recoveryRouter.get("/", async (req, res) => {
       console.log("fecha y hora envio de correo    :" +timemail );
       const htmlBody = `<p>Hola ${user.first_name},</p>
                        <p>Para cambiar tu contraseña, haz clic en el siguiente enlace:</p>
-                       <a href="http://localhost:4000/recovery/changepassword?email=${user.email}&timemail=${timemail}">Cambiar Contraseña</a>`;
+                       <a href="https://tiendaebooks.onrender.com/recovery/changepassword?email=${user.email}&timemail=${timemail}">Cambiar Contraseña</a>`;
 
       await transporter.sendMail({
         to: email,

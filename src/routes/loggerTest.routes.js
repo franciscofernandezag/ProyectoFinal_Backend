@@ -11,9 +11,7 @@ loggerTestRouter.get("/", (req, res) => {
   loggerDev.info("Este es un mensaje de log de información");
   loggerDev.http("Este es un mensaje de log HTTP");
   loggerDev.debug("Este es un mensaje de log debug");
-
 ;
-  
   res.send("Registro de prueba de logs completado.");
 });
 

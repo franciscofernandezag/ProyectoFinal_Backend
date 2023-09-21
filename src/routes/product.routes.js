@@ -45,8 +45,8 @@ productRouter.get("/", async (req, res) => {
       page: parseInt(page),
       hasPrevPage: page > 1,
       hasNextPage: page < totalPages,
-      prevLink: page > 1 ? `http://localhost:4000/products?limit=${limit}&page=${parseInt(page) - 1}` : null,
-      nextLink: page < totalPages ? `http://localhost:4000/products?limit=${limit}&page=${parseInt(page) + 1}` : null,
+      prevLink: page > 1 ? `https://tiendaebooks.onrender.com/products?limit=${limit}&page=${parseInt(page) - 1}` : null,
+      nextLink: page < totalPages ? `https://tiendaebooks.onrender.com/products?limit=${limit}&page=${parseInt(page) + 1}` : null,
     };
 
     loggerProd.info(`Productos obtenidos satisfactoriamente. Cantidad de productos: ${products.length}`);

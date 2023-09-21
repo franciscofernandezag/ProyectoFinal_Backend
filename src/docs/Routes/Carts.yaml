@@ -1,0 +1,154 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API de Carritos
+  description: Documentación de la API para la gestión de carritos de compras.
+  version: 1.0.0
+
+paths:
+
+  /carts/{cartId}/products/{productId}:
+    post:
+      tags:          
+        - Carts 
+      summary: Agregar producto a un carrito
+      description: Agrega un producto a un carrito específico.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          required: true
+          description: ID del carrito donde se agregará el producto.
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto a agregar al carrito.
+      responses:
+        '200':
+          description: Producto agregado exitosamente al carrito.
+          content:
+            application/json:
+              example:
+                message: Producto agregado exitosamente al carrito.
+        '404':
+          description: Carrito no encontrado o producto no encontrado.
+
+
+  /carts/{cartId}:
+    get:
+      tags:          
+        - Carts   
+      summary: Obtener detalles de un carrito por su ID
+      description: Retorna los detalles de un carrito por su ID.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          required: true
+          description: ID del carrito a obtener.
+      responses:
+        '200':
+          description: Detalles del carrito.
+          content:
+            application/json:
+              example:
+                cart:
+                  _id: "605db372e9e8f7c6c49d4587"
+                  products:
+                    - id: "605db374e9e8f7c6c49d4588"
+                      quantity: 2
+                    - id: "605db378e9e8f7c6c49d4589"
+                      quantity: 1
+                cartId: "605db372e9e8f7c6c49d4587"
+                products:
+                  - id: "605db374e9e8f7c6c49d4588"
+                    title: Producto 1
+                    price: 10
+                    quantity: 2
+                  - id: "605db378e9e8f7c6c49d4589"
+                    title: Producto 2
+                    price: 20
+                    quantity: 1
+                total: 40
+                message: Carrito obtenido satisfactoriamente.
+        '404':
+          description: Carrito no encontrado.
+
+
+  /carts/{cartId}/products:
+    get:
+      tags:          
+        - Carts    
+      summary: Eliminar todos los productos del carrito
+      description: Elimina todos los productos del carrito.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          required: true
+          description: ID del carrito del cual se eliminarán los productos.
+      responses:
+        '200':
+          description: Todos los productos eliminados exitosamente del carrito.
+          content:
+            application/json:
+              example:
+                message: Todos los productos eliminados exitosamente del carrito.
+        '404':
+          description: Carrito no encontrado.
+
+  /carts/{cartId}/products/{productId}/delete:
+    post:
+      tags:          
+        - Carts    # Corrección: Etiqueta correcta
+      summary: Eliminar un producto del carrito
+      description: Elimina un producto específico del carrito.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          required: true
+          description: ID del carrito del cual se eliminará el producto.
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto a eliminar del carrito.
+      responses:
+        '200':
+          description: Producto eliminado exitosamente del carrito.
+          content:
+            application/json:
+              example:
+                message: Producto eliminado exitosamente del carrito.
+        '404':
+          description: Carrito no encontrado o producto no encontrado.
+
+  /carts/{cartId}/purchase:
+    post:
+      tags:
+        - Carts    
+      summary: Finalizar compra
+      description: Finaliza la compra, actualiza el stock de productos y crea un registro de compra.
+      parameters:
+        - in: path
+          name: cartId
+          schema:
+            type: string
+          required: true
+          description: ID del carrito que se va a comprar.
+      responses:
+        '200':
+          description: Compra finalizada exitosamente.
+          content:
+            application/json:
+              example:
+                message: Compra finalizada exitosamente.
+        '404':
+          description: Carrito no encontrado o productos no disponibles para la compra.

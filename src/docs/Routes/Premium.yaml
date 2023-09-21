@@ -1,0 +1,200 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API para Usuarios Premium
+  description: Documentación de la API para las funcionalidades de usuarios premium.
+  version: 1.0.0
+
+tags:
+  - name: Premium Users
+    description: Premium REST API Routes
+
+paths:
+  /premium:
+    get:
+      tags:
+        - Premium Users
+      summary: Página principal de usuarios premium
+      description: Retorna la página principal para los usuarios premium.
+      responses:
+        '200':
+          description: Página principal exitosa.
+          content:
+            text/html:
+              example: Página principal para usuarios premium.
+
+  /premium/admin:
+    get:
+      tags:
+        - Premium Users
+      summary: Ver productos como usuario premium
+      description: Retorna una lista de productos paginados y ordenados para los usuarios premium.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Cantidad máxima de productos por página (opcional).
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Número de página (opcional).
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Orden de los productos (asc para ascendente, desc para descendente) (opcional).
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Búsqueda de productos por título (opcional).
+        - in: query
+          name: message
+          schema:
+            type: string
+          description: Mensaje (opcional).
+      responses:
+        '200':
+          description: Respuesta exitosa. Retorna la lista de productos paginados.
+          content:
+            text/html:
+              example: Página de productos para usuarios premium.
+        '500':
+          description: Error interno del servidor. No se pudieron obtener los productos.
+
+  /premium/products/owner/addproduct:
+    post:
+      tags:
+        - Premium Users
+      summary: Agregar producto como usuario premium
+      description: Agrega un nuevo producto a la base de datos como usuario premium.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Código del producto.
+                title:
+                  type: string
+                  description: Título del producto.
+                description:
+                  type: string
+                  description: Descripción del producto.
+                stock:
+                  type: integer
+                  description: Stock del producto.
+                id:
+                  type: string
+                  description: ID del producto.
+                price:
+                  type: integer
+                  description: Precio del producto.
+                thumbnail:
+                  type: string
+                  description: URL de la imagen del producto.
+              required:
+                - code
+                - title
+                - description
+                - stock
+                - id
+                - price
+                - thumbnail
+      responses:
+        '200':
+          description: Producto agregado exitosamente.
+        '500':
+          description: Error interno del servidor. No se pudo agregar el producto.
+
+
+  /premium/products/{productId}/update-stock:
+    post:
+      tags:
+        - Premium Users
+      summary: Actualizar stock del producto como usuario premium
+      description: Actualiza el stock de un producto como usuario premium.
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto a actualizar.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Nuevo valor de stock.
+              required:
+                - amount
+      responses:
+        '200':
+          description: Stock del producto actualizado exitosamente.
+        '404':
+          description: Producto no encontrado.
+        '500':
+          description: Error interno del servidor. No se pudo actualizar el stock.
+
+  /premium/products/{productId}/update-price:
+    post:
+      tags:
+        - Premium Users
+      summary: Actualizar precio del producto como usuario premium ( solo si es propietario)
+      description: Actualiza el precio de un producto como usuario premium.
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto a actualizar.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Nuevo valor de precio.
+              required:
+                - amount
+      responses:
+        '200':
+          description: Precio del producto actualizado exitosamente.
+        '404':
+          description: Producto no encontrado.
+        '500':
+          description: Error interno del servidor. No se pudo actualizar el precio.
+
+  /premium/products/{productId}/delete-product:
+    post:
+      tags:
+        - Premium Users
+      summary: Eliminar producto como usuario premium ( solo si es propietario)
+      description: Elimina un producto de la base de datos como usuario premium.
+      parameters:
+        - in: path
+          name: productId
+          schema:
+            type: string
+          required: true
+          description: ID del producto a eliminar.
+      responses:
+        '200':
+          description: Producto eliminado exitosamente.
+        '404':
+          description: Producto no encontrado.
+        '500':
+          description: Error interno del servidor. No se pudo eliminar el producto.

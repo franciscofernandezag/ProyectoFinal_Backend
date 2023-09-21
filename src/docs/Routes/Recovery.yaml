@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API de Recuperación de Contraseña
+  description: Documentación de la API para recuperar contraseñas de usuarios.
+  version: 1.0.0
+
+tags:
+  - name: Recovery
+    description: Recovery REST API Routes
+
+paths:
+  /recovery:
+    get:
+      tags:
+        - Recovery
+      summary: Enviar correo de recuperación de contraseña
+      description: Envía un correo electrónico al usuario con un enlace para cambiar la contraseña.
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Correo electrónico del usuario registrado.
+      responses:
+        '200':
+          description: Correo de recuperación de contraseña enviado exitosamente.
+          content:
+            text/html:
+              example: Correo de recuperación de contraseña enviado.
+
+  /recovery/changepassword:
+    get:
+      tags:
+        - Recovery
+      summary: Verificar enlace de cambio de contraseña
+      description: Verifica si el enlace de cambio de contraseña es válido y aún no ha expirado.
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Correo electrónico del usuario registrado.
+        - in: query
+          name: timemail
+          schema:
+            type: string
+          required: true
+          description: Marca de tiempo del envío del correo de recuperación de contraseña.
+      responses:
+        '200':
+          description: Enlace de cambio de contraseña válido.
+          content:
+            text/html:
+              example: Enlace de cambio de contraseña válido.
+
+  /recovery/changepassword/mailsended:
+    get:
+      tags:
+        - Recovery
+      summary: Cambiar contraseña
+      description: Cambia la contraseña del usuario después de verificar la validez del enlace.
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          required: true
+          description: Correo electrónico del usuario registrado.
+        - in: query
+          name: newPassword
+          schema:
+            type: string
+          required: true
+          description: Nueva contraseña del usuario.
+      responses:
+        '200':
+          description: Contraseña cambiada exitosamente.
+          content:
+            text/html:
+              example: Contraseña cambiada exitosamente.

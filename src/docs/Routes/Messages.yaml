@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API de Mensajes
+  description: Documentación de la API para enviar mensajes relacionados con compras.
+  version: 1.0.0
+
+tags:
+  - name: Messages
+    description: Messages REST API Routes
+
+paths:
+  /messages/succesful:
+    get:
+      tags:
+        - Messages
+      summary: Enviar correo de compra exitosa
+      description: Envía un correo electrónico al usuario con los detalles de una compra exitosa.
+      responses:
+        '200':
+          description: Correo de compra exitosa enviado exitosamente.
+          content:
+            text/html:
+              example: Correo de compra exitosa enviado.
+
+  /messages/failed:
+    get:
+      tags:
+        - Messages
+      summary: Enviar correo de compra pendiente
+      description: Envía un correo electrónico al usuario con los detalles de una compra pendiente.
+      responses:
+        '200':
+          description: Correo de compra pendiente enviado exitosamente.
+          content:
+            text/html:
+              example: Correo de compra pendiente enviado.

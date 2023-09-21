@@ -1,0 +1,18 @@
+tags:
+  - name: Products
+    description: Products REST API Routes
+  - name: Carts
+    description: Carts REST API Routes
+  - name: Admin Users
+    description: Admin REST API Routes 
+  - name: Premium Users
+    description: Premium REST API Routes
+  - name: Messages
+    description: Messages REST API Routes
+  - name: Recovery
+    description: Recovery REST API Routes
+  - name: LoginLocal
+    description: Autentificacion Local y registro con Passport Controllers/localAuth
+  - name: LoginGithub
+    description: Autentificacion github y registro con Passport Controllers/githubAuth
+

@@ -1,0 +1,192 @@
+paths:
+  /admin:
+    get:
+      tags:
+        - Admin Users
+      summary: Obtener lista de productos para administradores
+      description: Retorna una lista de productos para los usuarios administradores.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Cantidad máxima de productos por página (opcional).
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Número de página (opcional).
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Orden de los productos (asc para ascendente, desc para descendente) (opcional).
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Búsqueda de productos por título (opcional).
+        - in: query
+          name: message
+          schema:
+            type: string
+          description: Mensaje opcional a mostrar (opcional).
+      responses:
+        "200":
+          description: Respuesta exitosa. Retorna la lista de productos paginados.
+          content:
+            application/json:
+              example:
+                status: success
+                payload:
+                  - _id: "605db372e9e8f7c6c49d4587"
+                    title: Producto 1
+                    price: 10
+                    quantity: 2
+                  - _id: "605db374e9e8f7c6c49d4588"
+                    title: Producto 2
+                    price: 20
+                    quantity: 1
+                totalPages: 2
+                prevPage: 1
+                nextPage: 2
+                page: 1
+                hasPrevPage: false
+                hasNextPage: true
+                prevLink: null
+                nextLink: "http://localhost:4000/admin?limit=2&page=2"
+        "500":
+          description: Error interno del servidor. No se pudieron obtener los productos.
+
+  /admin/products/{id}/update-stock:
+    post:
+      tags:
+        - Admin Users
+      summary: Actualizar stock de un producto
+      description: Actualiza el stock de un producto específico.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto a actualizar el stock.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: Nueva cantidad en stock.
+              required:
+                - amount
+      responses:
+        "200":
+          description: Stock actualizado exitosamente.
+        "404":
+          description: Producto no encontrado.
+
+  /admin/products/{id}/update-price:
+    post:
+      tags:
+        - Admin Users
+      summary: Actualizar precio de un producto
+      description: Actualiza el precio de un producto específico.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto a actualizar el precio.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: Nuevo precio del producto.
+              required:
+                - amount
+      responses:
+        "200":
+          description: Precio actualizado exitosamente.
+        "404":
+          description: Producto no encontrado.
+
+  /admin/products/{id}/delete-product:
+    post:
+      tags:
+        - Admin Users
+      summary: Eliminar un producto del market
+      description: Elimina un producto específico del market.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del producto a eliminar.
+      responses:
+        "200":
+          description: Producto eliminado exitosamente.
+        "404":
+          description: Producto no encontrado.
+
+  /admin/products/owner/addproduct:
+    post:
+      tags:
+        - Admin Users
+      summary: Agregar un nuevo producto
+      description: Agrega un nuevo producto al market.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: Código del producto.
+                title:
+                  type: string
+                  description: Título del producto.
+                description:
+                  type: string
+                  description: Descripción del producto.
+                stock:
+                  type: integer
+                  description: Stock del producto.
+                id:
+                  type: string
+                  description: ID del producto.
+                status:
+                  type: boolean
+                  description: Estado del producto.
+                price:
+                  type: number
+                  description: Precio del producto.
+                thumbnail:
+                  type: string
+                  description: URL de la imagen del producto.
+              required:
+                - code
+                - title
+                - description
+                - stock
+                - id
+                - price
+                - thumbnail
+      responses:
+        "200":
+          description: Producto agregado exitosamente.
+        "500":
+          description: Error interno del servidor. No se pudo agregar el producto.
+

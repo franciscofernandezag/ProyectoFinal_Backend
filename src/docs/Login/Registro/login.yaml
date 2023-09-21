@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API de Autenticación Local
+  description: Documentación de la API para autenticación de usuarios locales.
+  version: 1.0.0
+
+tags:
+  - name: LoginLocal
+    description: Autenticación Local REST API Controllers/localAuth
+
+paths:
+  /login:
+    post:
+      tags:
+        - LoginLocal
+      summary: Iniciar sesión de usuario
+      description: Iniciar sesión de usuario utilizando autenticación local.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: usuario@example.com
+                password:
+                  type: string
+                  example: secreto123
+      responses:
+        '200':
+          description: Usuario autenticado exitosamente.
+          content:
+            application/json:
+              example:
+                message: Inicio de sesión exitoso.
+                user:
+                  first_name: Usuario
+                  last_name: Ejemplo
+                  email: usuario@example.com
+                  rol: cliente
+        '400':
+          description: Error de solicitud.
+          content:
+            application/json:
+              example:
+                error: Campos obligatorios faltantes.
+        '401':
+          description: Credenciales inválidas.
+          content:
+            application/json:
+              example:
+                error: Credenciales inválidas. Intente nuevamente.
+
+  /register:
+    post:
+      tags:
+        - LoginLocal
+      summary: Registrar nuevo usuario
+      description: Registrar un nuevo usuario utilizando autenticación local.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Usuario
+                apellido:
+                  type: string
+                  example: Ejemplo
+                email:
+                  type: string
+                  example: usuario@example.com
+                edad:
+                  type: integer
+                  example: 25
+                genero:
+                  type: string
+                  example: masculino
+                rol:
+                  type: string
+                  example: cliente
+                password:
+                  type: string
+                  example: secreto123
+      responses:
+        '200':
+          description: Usuario registrado exitosamente.
+          content:
+            application/json:
+              example:
+                message: Usuario creado exitosamente.
+                user:
+                  first_name: Usuario
+                  last_name: Ejemplo
+                  email: usuario@example.com
+                  rol: cliente
+        '400':
+          description: Error de solicitud.
+          content:
+            application/json:
+              example:
+                error: Campos obligatorios faltantes o email en uso.
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              example:
+                error: Error en el servidor al registrar el usuario.

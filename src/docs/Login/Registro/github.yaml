@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: Documentación de API de Autenticación de GitHub
+  description: Documentación de la API para autenticación de usuarios a través de GitHub.
+  version: 1.0.0
+
+tags:
+  - name: LoginGithub
+    description: Autenticación GitHub REST API Controllers/githubAuth
+
+paths:
+  /auth/github:
+    get:
+      tags:
+        - LoginGithub
+      summary: LoginGithub
+      description: Iniciar el proceso de autenticación utilizando GitHub como proveedor.
+      responses:
+        '302':
+          description: Redirigir a la página de autenticación de GitHub.
+
+  /auth/github/callback:
+    get:
+      tags:
+        - LoginGithub
+      summary: Callback de autenticación de GitHub
+      description: Callback de GitHub que maneja la respuesta de autenticación y redirige al usuario.
+      responses:
+        '302':
+          description: Redirigir al usuario a la página correspondiente después de la autenticación.
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              example:
+                error: Error en el servidor al manejar la autenticación de GitHub.

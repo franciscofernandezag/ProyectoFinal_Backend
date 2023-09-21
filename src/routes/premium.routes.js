@@ -42,8 +42,8 @@ premiumRouter.get("/admin", async (req, res) => {
       page: parseInt(page),
       hasPrevPage: page > 1,
       hasNextPage: page < totalPages,
-      prevLink: page > 1 ? `http://localhost:4000/premium/admin?limit=${limit}&page=${parseInt(page) - 1}` : null,
-      nextLink: page < totalPages ? `http://localhost:4000/premium/admin?limit=${limit}&page=${parseInt(page) + 1}` : null,
+      prevLink: page > 1 ? `https://tiendaebooks.onrender.com/premium/admin?limit=${limit}&page=${parseInt(page) - 1}` : null,
+      nextLink: page < totalPages ? `https://tiendaebooks.onrender.com/premium/admin?limit=${limit}&page=${parseInt(page) + 1}` : null,
     };
 
     if (rol === "premium") {

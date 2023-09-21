@@ -10,8 +10,8 @@ import MongoStore from 'connect-mongo'
 import { __dirname, __filename } from './path.js'
 import { authenticate } from './middleware/authenticate.js';
 import { connectDatabase } from './database.js';
-import { loginUser } from "./controllers/localAuth.js"; 
-import { registerUser } from "./controllers/localAuth.js"; 
+import {loginUser} from './controllers/authController.js';
+import { registerUser } from "./controllers/registerController.js"; 
 import { logout } from './controllers/logout.js'; 
 import productRouter from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
@@ -107,8 +107,12 @@ app.set('views', path.resolve(__dirname, 'views'));
 // Conexion MongoDB
 connectDatabase();
 
+app.get("/",  async (req, res) => {
+  res.redirect("/home");
+});
+
 // Acceso Home
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
   res.render('home', {
     layout: false,
     partials: {

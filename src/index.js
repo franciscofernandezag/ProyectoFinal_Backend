@@ -113,7 +113,13 @@ app.get("/",  async (req, res) => {
 
 // Acceso Home
 app.get('/home', (req, res) => {
-  res.json({ message: 'Página de inicio' });
+  res.render('home', {
+    layout: false,
+    partials: {
+      navbar: 'navbar', 
+    },
+    title: 'Página de inicio',
+  });
 });
 
 // Rutas de login y registros 

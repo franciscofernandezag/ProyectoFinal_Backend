@@ -207,3 +207,14 @@ http: Server on port 4000 {"timestamp":"2023-09-20 21:15:48"}
 http: DB is connected {"timestamp":"2023-09-20 21:15:49"}
 http: Server on port 4000 {"timestamp":"2023-09-20 21:17:06"}
 http: DB is connected {"timestamp":"2023-09-20 21:17:07"}
+http: Server on port 4000 {"timestamp":"2023-09-20 21:42:52"}
+http: DB is connected {"timestamp":"2023-09-20 21:42:53"}
+http: Server on port 4000 {"timestamp":"2023-09-20 21:48:36"}
+http: DB is connected {"timestamp":"2023-09-20 21:48:37"}
+http: Server on port 4000 {"timestamp":"2023-09-20 21:50:21"}
+http: DB is connected {"timestamp":"2023-09-20 21:50:22"}
+http: Server on port 4000 {"timestamp":"2023-09-20 21:50:30"}
+http: DB is connected {"timestamp":"2023-09-20 21:50:31"}
+info: Usuario fco.fernandez.ag@gmail.com autenticado a través de GitHub. Última conexión: Wed Sep 20 2023 21:50:33 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-20 21:50:33"}
+info: Se envió un correo a fco.fernandez.ag@gmail.com con la compra exitosa procesada. {"timestamp":"2023-09-20 21:50:46"}
+info: Usuario fco.fernandez.ag@gmail.com cerró sesión. Última conexión: Wed Sep 20 2023 21:52:09 GMT-0300 (hora de verano de Chile) {"timestamp":"2023-09-20 21:52:09"}

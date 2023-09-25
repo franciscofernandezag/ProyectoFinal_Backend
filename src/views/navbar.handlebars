@@ -1,46 +1,50 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item flex-grow-1">
-      <form action="/products" method="GET" style="display: inline;">
-        <button type="submit" class="btn btn-link">
-          <i class="fas fa-home fa-2x"></i>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item flex-grow-1">
+        <form action="/products" method="GET" style="display: inline;">
+          <button type="submit" class="btn btn-link">
+            <i class="fas fa-home fa-2x"></i>
+            <span class="badge badge-danger"></span>
+            <span>Home</span>
+          </button>
+        </form>
+      </li>
+      <li class="nav-item flex-grow-1">
+        <a href="/chat" class="btn btn-link">
+          <i class="fas fa-comments fa-2x"></i>
           <span class="badge badge-danger"></span>
-          <span>Home</span>
-        </button>
-      </form>
-    </li>
-    <li class="nav-item flex-grow-1">
-      <a href="/chat" class="btn btn-link">
-        <i class="fas fa-comments fa-2x"></i>
-        <span class="badge badge-danger"></span>
-        <span>Chat</span>
-      </a>
-    </li>
-    <li class="nav-item flex-grow-1">
-      <form id="cart-form" action="/carts/{{cartId}}" method="GET" style="display: inline;">
-        <button type="submit" class="btn btn-link">
-          <i class="fas fa-shopping-cart fa-2x"></i>
-    <span id="cart-quantity-badge" class="badge badge-pill badge-danger">{{totalProductosEnCarrito}}</span>
-          <span>Carrito</span>
-        </button>
-      </form>
-    </li>
-    <li class="nav-item flex-grow-1">
-      <form action="/users/{{userId}}" method="GET" style="display: inline;">
-        <button type="submit" class="btn btn-link">
-          <i class="fas fa-user fa-2x"></i>
-          <span>Perfil</span>
-        </button>
-      </form>
-    </li>
-    <li class="nav-item">
-      <form action="/logout" method="get">
-        <button type="submit" class="btn btn-link">
-          <i class="fas fa-sign-out-alt fa-2x"></i>
-          <span>Cerrar sesión</span>
-        </button>
-      </form>
-    </li>
-  </ul>
+          <span>Chat</span>
+        </a>
+      </li>
+      <li class="nav-item flex-grow-1">
+        <form id="cart-form" action="/carts/{{cartId}}" method="GET" style="display: inline;">
+          <button type="submit" class="btn btn-link">
+            <i class="fas fa-shopping-cart fa-2x"></i>
+            <span id="cart-quantity-badge" class="badge badge-pill badge-danger">{{totalProductosEnCarrito}}</span>
+            <span>Carrito</span>
+          </button>
+        </form>
+      </li>
+      <li class="nav-item flex-grow-1">
+        <form action="/users/{{userId}}" method="GET" style="display: inline;">
+          <button type="submit" class="btn btn-link">
+            <i class="fas fa-user fa-2x"></i>
+            <span>Perfil</span>
+          </button>
+        </form>
+      </li>
+      <li class="nav-item">
+        <form action="/logout" method="get">
+          <button type="submit" class="btn btn-link">
+            <i class="fas fa-sign-out-alt fa-2x"></i>
+            <span>Cerrar sesión</span>
+          </button>
+        </form>
+      </li>
+    </ul>
+  </div>
 </nav>
-
